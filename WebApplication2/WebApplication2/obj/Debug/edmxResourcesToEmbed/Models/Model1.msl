@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="vidly2ModelStoreContainer" CdmEntityContainer="vidly2Entities">
+    <EntitySetMapping Name="Customer">
+      <EntityTypeMapping TypeName="vidly2Model.Customer">
+        <MappingFragment StoreEntitySet="Customer">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="IdMembershipType" ColumnName="IdMembershipType" />
+          <ScalarProperty Name="IsSuscribedToNewsletter" ColumnName="IsSuscribedToNewsletter" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MembershipType">
+      <EntityTypeMapping TypeName="vidly2Model.MembershipType">
+        <MappingFragment StoreEntitySet="MembershipType">
+          <ScalarProperty Name="SingupFree" ColumnName="SingupFree" />
+          <ScalarProperty Name="DurationlnMonths" ColumnName="DurationlnMonths" />
+          <ScalarProperty Name="DiscountRate" ColumnName="DiscountRate" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="MembershipName" ColumnName="MembershipName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Movie">
+      <EntityTypeMapping TypeName="vidly2Model.Movie">
+        <MappingFragment StoreEntitySet="Movie">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Rents">
+      <EntityTypeMapping TypeName="vidly2Model.Rents">
+        <MappingFragment StoreEntitySet="Rents">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdMovie" ColumnName="IdMovie" />
+          <ScalarProperty Name="IdCustomer" ColumnName="IdCustomer" />
+          <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+          <ScalarProperty Name="DateRental" ColumnName="DateRental" />
+          <ScalarProperty Name="DateDevol" ColumnName="DateDevol" />
+          <ScalarProperty Name="Returned" ColumnName="Returned" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="vidly2Model.Users">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Correo" ColumnName="Correo" />
+          <ScalarProperty Name="Clave" ColumnName="Clave" />
+          <ScalarProperty Name="Perfil" ColumnName="Perfil" />
+          <ScalarProperty Name="Idastate" ColumnName="Idastate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

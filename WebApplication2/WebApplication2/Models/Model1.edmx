@@ -1,0 +1,344 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="vidly2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IdMembershipType" Type="int" Nullable="false" />
+          <Property Name="IsSuscribedToNewsletter" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MembershipType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="SingupFree" Type="int" Nullable="false" />
+          <Property Name="DurationlnMonths" Type="int" Nullable="false" />
+          <Property Name="DiscountRate" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="MembershipName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Movie">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Rents">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="IdMovie" Type="int" Nullable="false" />
+          <Property Name="IdCustomer" Type="int" Nullable="false" />
+          <Property Name="IdUser" Type="int" Nullable="false" />
+          <Property Name="DateRental" Type="date" Nullable="false" />
+          <Property Name="DateDevol" Type="date" />
+          <Property Name="Returned" Type="bit" />
+          <Property Name="Description" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Correo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Clave" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Perfil" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Idastate" Type="int" />
+        </EntityType>
+        <Association Name="FK_Customer_MembershipType1">
+          <End Role="MembershipType" Type="Self.MembershipType" Multiplicity="1" />
+          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MembershipType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="IdMembershipType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rents_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Rents" Type="Self.Rents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Rents">
+              <PropertyRef Name="IdCustomer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rents_Movie">
+          <End Role="Movie" Type="Self.Movie" Multiplicity="1" />
+          <End Role="Rents" Type="Self.Rents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movie">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Rents">
+              <PropertyRef Name="IdMovie" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rents_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Rents" Type="Self.Rents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Rents">
+              <PropertyRef Name="IdUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="vidly2ModelStoreContainer">
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MembershipType" EntityType="Self.MembershipType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Movie" EntityType="Self.Movie" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rents" EntityType="Self.Rents" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Customer_MembershipType1" Association="Self.FK_Customer_MembershipType1">
+            <End Role="MembershipType" EntitySet="MembershipType" />
+            <End Role="Customer" EntitySet="Customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rents_Customer" Association="Self.FK_Rents_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Rents" EntitySet="Rents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rents_Movie" Association="Self.FK_Rents_Movie">
+            <End Role="Movie" EntitySet="Movie" />
+            <End Role="Rents" EntitySet="Rents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rents_Users" Association="Self.FK_Rents_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Rents" EntitySet="Rents" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="vidly2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IdMembershipType" Type="Int32" Nullable="false" />
+          <Property Name="IsSuscribedToNewsletter" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="MembershipType" Relationship="Self.FK_Customer_MembershipType1" FromRole="Customer" ToRole="MembershipType" />
+          <NavigationProperty Name="Rents" Relationship="Self.FK_Rents_Customer" FromRole="Customer" ToRole="Rents" />
+        </EntityType>
+        <EntityType Name="MembershipType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="SingupFree" Type="Int32" Nullable="false" />
+          <Property Name="DurationlnMonths" Type="Int32" Nullable="false" />
+          <Property Name="DiscountRate" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="MembershipName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_Customer_MembershipType1" FromRole="MembershipType" ToRole="Customer" />
+        </EntityType>
+        <EntityType Name="Movie">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Rents" Relationship="Self.FK_Rents_Movie" FromRole="Movie" ToRole="Rents" />
+        </EntityType>
+        <EntityType Name="Rents">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="IdMovie" Type="Int32" Nullable="false" />
+          <Property Name="IdCustomer" Type="Int32" Nullable="false" />
+          <Property Name="IdUser" Type="Int32" Nullable="false" />
+          <Property Name="DateRental" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DateDevol" Type="DateTime" Precision="0" />
+          <Property Name="Returned" Type="Boolean" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_Rents_Customer" FromRole="Rents" ToRole="Customer" />
+          <NavigationProperty Name="Movie" Relationship="Self.FK_Rents_Movie" FromRole="Rents" ToRole="Movie" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_Rents_Users" FromRole="Rents" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Correo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Clave" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Perfil" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Idastate" Type="Int32" />
+          <NavigationProperty Name="Rents" Relationship="Self.FK_Rents_Users" FromRole="Users" ToRole="Rents" />
+        </EntityType>
+        <Association Name="FK_Customer_MembershipType1">
+          <End Role="MembershipType" Type="Self.MembershipType" Multiplicity="1" />
+          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MembershipType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="IdMembershipType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rents_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Rents" Type="Self.Rents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Rents">
+              <PropertyRef Name="IdCustomer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rents_Movie">
+          <End Role="Movie" Type="Self.Movie" Multiplicity="1" />
+          <End Role="Rents" Type="Self.Rents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movie">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Rents">
+              <PropertyRef Name="IdMovie" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rents_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Rents" Type="Self.Rents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Rents">
+              <PropertyRef Name="IdUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="vidly2Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Customer" EntityType="Self.Customer" />
+          <EntitySet Name="MembershipType" EntityType="Self.MembershipType" />
+          <EntitySet Name="Movie" EntityType="Self.Movie" />
+          <EntitySet Name="Rents" EntityType="Self.Rents" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
+          <AssociationSet Name="FK_Customer_MembershipType1" Association="Self.FK_Customer_MembershipType1">
+            <End Role="MembershipType" EntitySet="MembershipType" />
+            <End Role="Customer" EntitySet="Customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rents_Customer" Association="Self.FK_Rents_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Rents" EntitySet="Rents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rents_Movie" Association="Self.FK_Rents_Movie">
+            <End Role="Movie" EntitySet="Movie" />
+            <End Role="Rents" EntitySet="Rents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rents_Users" Association="Self.FK_Rents_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Rents" EntitySet="Rents" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="vidly2ModelStoreContainer" CdmEntityContainer="vidly2Entities">
+          <EntitySetMapping Name="Customer">
+            <EntityTypeMapping TypeName="vidly2Model.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IdMembershipType" ColumnName="IdMembershipType" />
+                <ScalarProperty Name="IsSuscribedToNewsletter" ColumnName="IsSuscribedToNewsletter" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MembershipType">
+            <EntityTypeMapping TypeName="vidly2Model.MembershipType">
+              <MappingFragment StoreEntitySet="MembershipType">
+                <ScalarProperty Name="SingupFree" ColumnName="SingupFree" />
+                <ScalarProperty Name="DurationlnMonths" ColumnName="DurationlnMonths" />
+                <ScalarProperty Name="DiscountRate" ColumnName="DiscountRate" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="MembershipName" ColumnName="MembershipName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Movie">
+            <EntityTypeMapping TypeName="vidly2Model.Movie">
+              <MappingFragment StoreEntitySet="Movie">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rents">
+            <EntityTypeMapping TypeName="vidly2Model.Rents">
+              <MappingFragment StoreEntitySet="Rents">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdMovie" ColumnName="IdMovie" />
+                <ScalarProperty Name="IdCustomer" ColumnName="IdCustomer" />
+                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+                <ScalarProperty Name="DateRental" ColumnName="DateRental" />
+                <ScalarProperty Name="DateDevol" ColumnName="DateDevol" />
+                <ScalarProperty Name="Returned" ColumnName="Returned" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="vidly2Model.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="Clave" ColumnName="Clave" />
+                <ScalarProperty Name="Perfil" ColumnName="Perfil" />
+                <ScalarProperty Name="Idastate" ColumnName="Idastate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
