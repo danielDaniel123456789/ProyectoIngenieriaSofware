@@ -158,6 +158,7 @@
     <Compile Include="App_Start\BundleConfig.vb" />
     <Compile Include="App_Start\FilterConfig.vb" />
     <Compile Include="App_Start\RouteConfig.vb" />
+    <Compile Include="Controllers\MoviesController.vb" />
     <Compile Include="Controllers\UsersController.vb" />
     <Compile Include="Global.asax.vb">
       <DependentUpon>Global.asax</DependentUpon>
@@ -448,6 +449,11 @@
     <Content Include="Views\Users\Details.vbhtml" />
     <Content Include="Views\Users\Edit.vbhtml" />
     <Content Include="Views\Users\Index.vbhtml" />
+    <Content Include="Views\Movies\Create.vbhtml" />
+    <Content Include="Views\Movies\Delete.vbhtml" />
+    <Content Include="Views\Movies\Details.vbhtml" />
+    <Content Include="Views\Movies\Edit.vbhtml" />
+    <Content Include="Views\Movies\Index.vbhtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="favicon.ico" />

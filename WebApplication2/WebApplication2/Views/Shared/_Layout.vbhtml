@@ -59,7 +59,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/Home/Contact">
+                <a class="nav-link" href="/Movies/Index">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Movies</span>
                 </a>
